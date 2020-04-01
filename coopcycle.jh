@@ -1,0 +1,123 @@
+// =================================
+// Entities
+// Help with the fields: https://www.jhipster.tech/jdl/entities-fields
+// =================================
+
+enum RoleOption {
+  CUSTOMER, DELIVERER, RESTAURANTOWNER, ADMINCOOP, ADMINSYS, DG
+}
+
+entity Role {
+  role RoleOption required
+}
+
+/**
+ * The User entity.
+ */
+entity User {
+  userId Long required unique
+  login String required unique minlength(3) maxlength(40)
+  email String required unique pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
+  password String required minlength(8)
+}
+
+/**
+ * The Restaurant entity.
+ */
+entity Restaurant {
+  restaurantId Long required unique
+  name String required minlength(1)
+  description String minlength(20) maxlength(280)
+}
+
+/**
+ * The Cooperative entity.
+ */
+entity Cooperative {
+  cooperativeId Long required unique
+  name String required minlength(1)
+  area String required minlength(1)
+}
+
+enum BasketState {
+  NOTFINISHED, VALIDATED, PAID
+}
+
+/**
+ * The Basket entity.
+ */
+entity Basket {
+  basketId Long required unique
+  basketState BasketState required
+}
+
+enum Disponibility {
+  AVAILABLE, UNAVAILABLE
+}
+
+/**
+ * The Product entity.
+ */
+entity Product {
+  productId Long required unique
+  name String required minlength(1)
+  description String minlength(5) maxlength(280)
+  price BigDecimal required min(0)
+  disponibility Disponibility required
+}
+
+enum PaymentMethod {
+  CB, BITCOIN, PAYPAL, IZLY
+}
+
+enum CourseState {
+  COMPLETED, PENDING, CANCELLED
+}
+
+enum PreparationState {
+  PENDING, INPROGRESS, COMPLETED
+}
+
+enum DeliveryState {
+  PENDINGDELIVERER, PENDINGPREPARATION, INPROGRESS, COMPLETED
+}
+
+/**
+ * The Course entity.
+ */
+entity Course {
+  courseId Long required unique
+  state CourseState required
+  state PreparationState required
+  state DeliveryState required
+  paymentMethod PaymentMethod required
+  estimatedPreparationTime Instant required
+  estimatedDeliveryTime Instant required
+  preparationTime Instant required
+  deliveryTime Instant required
+}
+
+// =================================
+// Relations
+// =================================
+
+relationship ManyToMany {
+  Cooperative{restaurant} to Restaurant{cooperative}
+  Product{basket} to Basket{product}
+  Cooperative{adminsys} to User{adminsys}
+  Cooperative{admincoop} to User{admincoop}
+  Role{accountId} to User{role}
+}
+
+relationship ManyToOne {
+  Product{restaurant} to Restaurant
+  Course{restaurant} to Restaurant
+  Course{deliverer} to User
+  Course{customer} to User
+  Restaurant{owner} to User
+  Cooperative{dg} to User
+}
+
+relationship OneToOne {
+  Basket{orderId} to Course{basketId}
+}
