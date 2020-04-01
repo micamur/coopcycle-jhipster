@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-role-heading" jhiTranslate="coopcycleApp.role.home.createOrEditLabel">Create or edit a Role</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.role.role" for="field_role">Role</label>
+                    <select class="form-control" name="role" formControlName="role" id="field_role">
+                        <option value="CUSTOMER">{{ 'coopcycleApp.RoleOption.CUSTOMER' | translate }}</option>
+                        <option value="DELIVERER">{{ 'coopcycleApp.RoleOption.DELIVERER' | translate }}</option>
+                        <option value="RESTAURANTOWNER">{{ 'coopcycleApp.RoleOption.RESTAURANTOWNER' | translate }}</option>
+                        <option value="ADMINCOOP">{{ 'coopcycleApp.RoleOption.ADMINCOOP' | translate }}</option>
+                        <option value="ADMINSYS">{{ 'coopcycleApp.RoleOption.ADMINSYS' | translate }}</option>
+                        <option value="DG">{{ 'coopcycleApp.RoleOption.DG' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('role')!.invalid && (editForm.get('role')!.dirty || editForm.get('role')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('role')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label jhiTranslate="coopcycleApp.role.accountId" for="field_accountIds">Account Id</label>
+                    <select class="form-control" id="field_accountIds" multiple name="accountIds" formControlName="accountIds">
+                        <option [ngValue]="getSelected(editForm.get('accountIds')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

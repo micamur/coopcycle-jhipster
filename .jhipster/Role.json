@@ -1,0 +1,33 @@
+{
+    "name": "Role",
+    "fields": [
+        {
+            "fieldName": "role",
+            "fieldType": "RoleOption",
+            "fieldValues": "CUSTOMER,DELIVERER,RESTAURANTOWNER,ADMINCOOP,ADMINSYS,DG",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "role",
+            "relationshipName": "accountId",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200401135800",
+    "entityTableName": "role",
+    "dto": "no",
+    "pagination": "no",
+    "service": "no",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

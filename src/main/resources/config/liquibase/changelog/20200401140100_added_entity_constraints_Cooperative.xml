@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity Cooperative.
+    -->
+    <changeSet id="20200401140100-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dg_id"
+                                 baseTableName="cooperative"
+                                 constraintName="fk_cooperative_dg_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+        <addForeignKeyConstraint baseColumnNames="cooperative_id"
+                                 baseTableName="cooperative_restaurant"
+                                 constraintName="fk_cooperative_restaurant_cooperative_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cooperative"/>
+
+        <addForeignKeyConstraint baseColumnNames="restaurant_id"
+                                 baseTableName="cooperative_restaurant"
+                                 constraintName="fk_cooperative_restaurant_restaurant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="restaurant"/>
+        
+        <addForeignKeyConstraint baseColumnNames="cooperative_id"
+                                 baseTableName="cooperative_adminsys"
+                                 constraintName="fk_cooperative_adminsys_cooperative_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cooperative"/>
+
+        <addForeignKeyConstraint baseColumnNames="adminsys_id"
+                                 baseTableName="cooperative_adminsys"
+                                 constraintName="fk_cooperative_adminsys_adminsys_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+        <addForeignKeyConstraint baseColumnNames="cooperative_id"
+                                 baseTableName="cooperative_admincoop"
+                                 constraintName="fk_cooperative_admincoop_cooperative_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cooperative"/>
+
+        <addForeignKeyConstraint baseColumnNames="admincoop_id"
+                                 baseTableName="cooperative_admincoop"
+                                 constraintName="fk_cooperative_admincoop_admincoop_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+        
+    </changeSet>
+</databaseChangeLog>

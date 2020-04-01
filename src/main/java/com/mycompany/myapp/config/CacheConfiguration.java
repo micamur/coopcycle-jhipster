@@ -42,6 +42,19 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Authority.class.getName());
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.mycompany.myapp.domain.Role.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Role.class.getName() + ".accountIds");
+            createCache(cm, com.mycompany.myapp.domain.Restaurant.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Restaurant.class.getName() + ".cooperatives");
+            createCache(cm, com.mycompany.myapp.domain.Cooperative.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Cooperative.class.getName() + ".restaurants");
+            createCache(cm, com.mycompany.myapp.domain.Cooperative.class.getName() + ".adminsys");
+            createCache(cm, com.mycompany.myapp.domain.Cooperative.class.getName() + ".admincoops");
+            createCache(cm, com.mycompany.myapp.domain.Basket.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Basket.class.getName() + ".products");
+            createCache(cm, com.mycompany.myapp.domain.Product.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.Product.class.getName() + ".baskets");
+            createCache(cm, com.mycompany.myapp.domain.Course.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

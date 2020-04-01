@@ -1,0 +1,13 @@
+{
+  "coopcycleApp": {
+    "RoleOption": {
+      "null": "",
+      "CUSTOMER": "CUSTOMER",
+      "DELIVERER": "DELIVERER",
+      "RESTAURANTOWNER": "RESTAURANTOWNER",
+      "ADMINCOOP": "ADMINCOOP",
+      "ADMINSYS": "ADMINSYS",
+      "DG": "DG"
+    }
+  }
+}

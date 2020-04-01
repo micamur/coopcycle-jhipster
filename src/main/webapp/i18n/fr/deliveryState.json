@@ -1,0 +1,11 @@
+{
+  "coopcycleApp": {
+    "DeliveryState": {
+      "null": "",
+      "PENDINGDELIVERER": "PENDINGDELIVERER",
+      "PENDINGPREPARATION": "PENDINGPREPARATION",
+      "INPROGRESS": "INPROGRESS",
+      "COMPLETED": "COMPLETED"
+    }
+  }
+}

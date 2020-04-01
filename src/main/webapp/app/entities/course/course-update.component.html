@@ -1,0 +1,166 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-course-heading" jhiTranslate="coopcycleApp.course.home.createOrEditLabel">Create or edit a Course</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.courseId" for="field_courseId">Course Id</label>
+                    <input type="number" class="form-control" name="courseId" id="field_courseId"
+                           formControlName="courseId"/>
+                    <div *ngIf="editForm.get('courseId')!.invalid && (editForm.get('courseId')!.dirty || editForm.get('courseId')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('courseId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('courseId')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.state" for="field_state">State</label>
+                    <select class="form-control" name="state" formControlName="state" id="field_state">
+                        <option value="PENDINGDELIVERER">{{ 'coopcycleApp.DeliveryState.PENDINGDELIVERER' | translate }}</option>
+                        <option value="PENDINGPREPARATION">{{ 'coopcycleApp.DeliveryState.PENDINGPREPARATION' | translate }}</option>
+                        <option value="INPROGRESS">{{ 'coopcycleApp.DeliveryState.INPROGRESS' | translate }}</option>
+                        <option value="COMPLETED">{{ 'coopcycleApp.DeliveryState.COMPLETED' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('state')!.invalid && (editForm.get('state')!.dirty || editForm.get('state')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('state')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.paymentMethod" for="field_paymentMethod">Payment Method</label>
+                    <select class="form-control" name="paymentMethod" formControlName="paymentMethod" id="field_paymentMethod">
+                        <option value="CB">{{ 'coopcycleApp.PaymentMethod.CB' | translate }}</option>
+                        <option value="BITCOIN">{{ 'coopcycleApp.PaymentMethod.BITCOIN' | translate }}</option>
+                        <option value="PAYPAL">{{ 'coopcycleApp.PaymentMethod.PAYPAL' | translate }}</option>
+                        <option value="IZLY">{{ 'coopcycleApp.PaymentMethod.IZLY' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('paymentMethod')!.invalid && (editForm.get('paymentMethod')!.dirty || editForm.get('paymentMethod')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('paymentMethod')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.estimatedPreparationTime" for="field_estimatedPreparationTime">Estimated Preparation Time</label>
+                    <div class="d-flex">
+                        <input id="field_estimatedPreparationTime" type="datetime-local" class="form-control" name="estimatedPreparationTime" formControlName="estimatedPreparationTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('estimatedPreparationTime')!.invalid && (editForm.get('estimatedPreparationTime')!.dirty || editForm.get('estimatedPreparationTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('estimatedPreparationTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('estimatedPreparationTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.estimatedDeliveryTime" for="field_estimatedDeliveryTime">Estimated Delivery Time</label>
+                    <div class="d-flex">
+                        <input id="field_estimatedDeliveryTime" type="datetime-local" class="form-control" name="estimatedDeliveryTime" formControlName="estimatedDeliveryTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('estimatedDeliveryTime')!.invalid && (editForm.get('estimatedDeliveryTime')!.dirty || editForm.get('estimatedDeliveryTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('estimatedDeliveryTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('estimatedDeliveryTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.preparationTime" for="field_preparationTime">Preparation Time</label>
+                    <div class="d-flex">
+                        <input id="field_preparationTime" type="datetime-local" class="form-control" name="preparationTime" formControlName="preparationTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('preparationTime')!.invalid && (editForm.get('preparationTime')!.dirty || editForm.get('preparationTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('preparationTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('preparationTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.deliveryTime" for="field_deliveryTime">Delivery Time</label>
+                    <div class="d-flex">
+                        <input id="field_deliveryTime" type="datetime-local" class="form-control" name="deliveryTime" formControlName="deliveryTime" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                    <div *ngIf="editForm.get('deliveryTime')!.invalid && (editForm.get('deliveryTime')!.dirty || editForm.get('deliveryTime')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('deliveryTime')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('deliveryTime')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
+                            This field should be a date and time.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.restaurant" for="field_restaurant">Restaurant</label>
+                    <select class="form-control" id="field_restaurant" name="restaurant" formControlName="restaurant">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="restaurantOption.id === editForm.get('restaurant')!.value?.id ? editForm.get('restaurant')!.value : restaurantOption" *ngFor="let restaurantOption of restaurants; trackBy: trackById">{{ restaurantOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.deliverer" for="field_deliverer">Deliverer</label>
+                    <select class="form-control" id="field_deliverer" name="deliverer" formControlName="deliverer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('deliverer')!.value?.id ? editForm.get('deliverer')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="coopcycleApp.course.customer" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" formControlName="customer">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id === editForm.get('customer')!.value?.id ? editForm.get('customer')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
