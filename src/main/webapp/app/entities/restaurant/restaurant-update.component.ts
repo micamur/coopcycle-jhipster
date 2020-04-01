@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IRestaurant, Restaurant } from 'app/shared/model/restaurant.model';
 import { RestaurantService } from './restaurant.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import { IUserAccount } from 'app/shared/model/user-account.model';
+import { UserAccountService } from 'app/entities/user-account/user-account.service';
 
 @Component({
   selector: 'jhi-restaurant-update',
@@ -16,11 +16,10 @@ import { UserService } from 'app/core/user/user.service';
 })
 export class RestaurantUpdateComponent implements OnInit {
   isSaving = false;
-  users: IUser[] = [];
+  useraccounts: IUserAccount[] = [];
 
   editForm = this.fb.group({
     id: [],
-    restaurantId: [null, [Validators.required]],
     name: [null, [Validators.required, Validators.minLength(1)]],
     description: [null, [Validators.minLength(20), Validators.maxLength(280)]],
     owner: []
@@ -28,7 +27,7 @@ export class RestaurantUpdateComponent implements OnInit {
 
   constructor(
     protected restaurantService: RestaurantService,
-    protected userService: UserService,
+    protected userAccountService: UserAccountService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -37,14 +36,13 @@ export class RestaurantUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ restaurant }) => {
       this.updateForm(restaurant);
 
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+      this.userAccountService.query().subscribe((res: HttpResponse<IUserAccount[]>) => (this.useraccounts = res.body || []));
     });
   }
 
   updateForm(restaurant: IRestaurant): void {
     this.editForm.patchValue({
       id: restaurant.id,
-      restaurantId: restaurant.restaurantId,
       name: restaurant.name,
       description: restaurant.description,
       owner: restaurant.owner
@@ -69,7 +67,6 @@ export class RestaurantUpdateComponent implements OnInit {
     return {
       ...new Restaurant(),
       id: this.editForm.get(['id'])!.value,
-      restaurantId: this.editForm.get(['restaurantId'])!.value,
       name: this.editForm.get(['name'])!.value,
       description: this.editForm.get(['description'])!.value,
       owner: this.editForm.get(['owner'])!.value
@@ -92,7 +89,7 @@ export class RestaurantUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IUser): any {
+  trackById(index: number, item: IUserAccount): any {
     return item.id;
   }
 }

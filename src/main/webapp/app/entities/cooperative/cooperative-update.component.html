@@ -12,22 +12,6 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="coopcycleApp.cooperative.cooperativeId" for="field_cooperativeId">Cooperative Id</label>
-                    <input type="number" class="form-control" name="cooperativeId" id="field_cooperativeId"
-                           formControlName="cooperativeId"/>
-                    <div *ngIf="editForm.get('cooperativeId')!.invalid && (editForm.get('cooperativeId')!.dirty || editForm.get('cooperativeId')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('cooperativeId')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('cooperativeId')?.errors?.number" jhiTranslate="entity.validation.number">
-                            This field should be a number.
-                        </small>
-                    </div>
-                </div>
-
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="coopcycleApp.cooperative.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
@@ -63,7 +47,7 @@
                     <label class="form-control-label" jhiTranslate="coopcycleApp.cooperative.dg" for="field_dg">Dg</label>
                     <select class="form-control" id="field_dg" name="dg" formControlName="dg">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="userOption.id === editForm.get('dg')!.value?.id ? editForm.get('dg')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                        <option [ngValue]="userAccountOption.id === editForm.get('dg')!.value?.id ? editForm.get('dg')!.value : userAccountOption" *ngFor="let userAccountOption of useraccounts; trackBy: trackById">{{ userAccountOption.id }}</option>
                     </select>
                 </div>
 
@@ -77,14 +61,14 @@
                 <div class="form-group">
                     <label jhiTranslate="coopcycleApp.cooperative.adminsys" for="field_adminsys">Adminsys</label>
                     <select class="form-control" id="field_adminsys" multiple name="adminsys" formControlName="adminsys">
-                        <option [ngValue]="getSelected(editForm.get('adminsys')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                        <option [ngValue]="getSelected(editForm.get('adminsys')!.value, userAccountOption)" *ngFor="let userAccountOption of useraccounts; trackBy: trackById">{{ userAccountOption.id }}</option>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label jhiTranslate="coopcycleApp.cooperative.admincoop" for="field_admincoops">Admincoop</label>
                     <select class="form-control" id="field_admincoops" multiple name="admincoops" formControlName="admincoops">
-                        <option [ngValue]="getSelected(editForm.get('admincoops')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                        <option [ngValue]="getSelected(editForm.get('admincoops')!.value, userAccountOption)" *ngFor="let userAccountOption of useraccounts; trackBy: trackById">{{ userAccountOption.id }}</option>
                     </select>
                 </div>
             </div>

@@ -29,10 +29,6 @@ public class Cooperative implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "cooperative_id", nullable = false, unique = true)
-    private Long cooperativeId;
-
-    @NotNull
     @Size(min = 1)
     @Column(name = "name", nullable = false)
     private String name;
@@ -44,7 +40,7 @@ public class Cooperative implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("cooperatives")
-    private User dg;
+    private UserAccount dg;
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -58,14 +54,14 @@ public class Cooperative implements Serializable {
     @JoinTable(name = "cooperative_adminsys",
                joinColumns = @JoinColumn(name = "cooperative_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "adminsys_id", referencedColumnName = "id"))
-    private Set<User> adminsys = new HashSet<>();
+    private Set<UserAccount> adminsys = new HashSet<>();
 
     @ManyToMany
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @JoinTable(name = "cooperative_admincoop",
                joinColumns = @JoinColumn(name = "cooperative_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "admincoop_id", referencedColumnName = "id"))
-    private Set<User> admincoops = new HashSet<>();
+    private Set<UserAccount> admincoops = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -74,19 +70,6 @@ public class Cooperative implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCooperativeId() {
-        return cooperativeId;
-    }
-
-    public Cooperative cooperativeId(Long cooperativeId) {
-        this.cooperativeId = cooperativeId;
-        return this;
-    }
-
-    public void setCooperativeId(Long cooperativeId) {
-        this.cooperativeId = cooperativeId;
     }
 
     public String getName() {
@@ -115,17 +98,17 @@ public class Cooperative implements Serializable {
         this.area = area;
     }
 
-    public User getDg() {
+    public UserAccount getDg() {
         return dg;
     }
 
-    public Cooperative dg(User user) {
-        this.dg = user;
+    public Cooperative dg(UserAccount userAccount) {
+        this.dg = userAccount;
         return this;
     }
 
-    public void setDg(User user) {
-        this.dg = user;
+    public void setDg(UserAccount userAccount) {
+        this.dg = userAccount;
     }
 
     public Set<Restaurant> getRestaurants() {
@@ -153,50 +136,54 @@ public class Cooperative implements Serializable {
         this.restaurants = restaurants;
     }
 
-    public Set<User> getAdminsys() {
+    public Set<UserAccount> getAdminsys() {
         return adminsys;
     }
 
-    public Cooperative adminsys(Set<User> users) {
-        this.adminsys = users;
+    public Cooperative adminsys(Set<UserAccount> userAccounts) {
+        this.adminsys = userAccounts;
         return this;
     }
 
-    public Cooperative addAdminsys(User user) {
-        this.adminsys.add(user);
+    public Cooperative addAdminsys(UserAccount userAccount) {
+        this.adminsys.add(userAccount);
+        userAccount.getAdminsys().add(this);
         return this;
     }
 
-    public Cooperative removeAdminsys(User user) {
-        this.adminsys.remove(user);
+    public Cooperative removeAdminsys(UserAccount userAccount) {
+        this.adminsys.remove(userAccount);
+        userAccount.getAdminsys().remove(this);
         return this;
     }
 
-    public void setAdminsys(Set<User> users) {
-        this.adminsys = users;
+    public void setAdminsys(Set<UserAccount> userAccounts) {
+        this.adminsys = userAccounts;
     }
 
-    public Set<User> getAdmincoops() {
+    public Set<UserAccount> getAdmincoops() {
         return admincoops;
     }
 
-    public Cooperative admincoops(Set<User> users) {
-        this.admincoops = users;
+    public Cooperative admincoops(Set<UserAccount> userAccounts) {
+        this.admincoops = userAccounts;
         return this;
     }
 
-    public Cooperative addAdmincoop(User user) {
-        this.admincoops.add(user);
+    public Cooperative addAdmincoop(UserAccount userAccount) {
+        this.admincoops.add(userAccount);
+        userAccount.getAdmincoops().add(this);
         return this;
     }
 
-    public Cooperative removeAdmincoop(User user) {
-        this.admincoops.remove(user);
+    public Cooperative removeAdmincoop(UserAccount userAccount) {
+        this.admincoops.remove(userAccount);
+        userAccount.getAdmincoops().remove(this);
         return this;
     }
 
-    public void setAdmincoops(Set<User> users) {
-        this.admincoops = users;
+    public void setAdmincoops(Set<UserAccount> userAccounts) {
+        this.admincoops = userAccounts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -220,7 +207,6 @@ public class Cooperative implements Serializable {
     public String toString() {
         return "Cooperative{" +
             "id=" + getId() +
-            ", cooperativeId=" + getCooperativeId() +
             ", name='" + getName() + "'" +
             ", area='" + getArea() + "'" +
             "}";

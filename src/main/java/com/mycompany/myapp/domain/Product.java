@@ -9,7 +9,6 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -32,10 +31,6 @@ public class Product implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "product_id", nullable = false, unique = true)
-    private Long productId;
-
-    @NotNull
     @Size(min = 1)
     @Column(name = "name", nullable = false)
     private String name;
@@ -46,8 +41,8 @@ public class Product implements Serializable {
 
     @NotNull
     @DecimalMin(value = "0")
-    @Column(name = "price", precision = 21, scale = 2, nullable = false)
-    private BigDecimal price;
+    @Column(name = "price", nullable = false)
+    private Float price;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -72,19 +67,6 @@ public class Product implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getProductId() {
-        return productId;
-    }
-
-    public Product productId(Long productId) {
-        this.productId = productId;
-        return this;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
     }
 
     public String getName() {
@@ -113,16 +95,16 @@ public class Product implements Serializable {
         this.description = description;
     }
 
-    public BigDecimal getPrice() {
+    public Float getPrice() {
         return price;
     }
 
-    public Product price(BigDecimal price) {
+    public Product price(Float price) {
         this.price = price;
         return this;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(Float price) {
         this.price = price;
     }
 
@@ -198,7 +180,6 @@ public class Product implements Serializable {
     public String toString() {
         return "Product{" +
             "id=" + getId() +
-            ", productId=" + getProductId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             ", price=" + getPrice() +

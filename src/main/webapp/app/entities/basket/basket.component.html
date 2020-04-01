@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="coopcycleApp.basket.basketId">Basket Id</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.basket.basketState">Basket State</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.basket.orderId">Order Id</span></th>
                     <th scope="col"></th>
@@ -32,7 +31,6 @@
             <tbody>
                 <tr *ngFor="let basket of baskets ;trackBy: trackId">
                     <td><a [routerLink]="['/basket', basket.id, 'view']">{{ basket.id }}</a></td>
-                    <td>{{ basket.basketId }}</td>
                     <td jhiTranslate="{{ 'coopcycleApp.BasketState.' + basket.basketState }}">{{ basket.basketState }}</td>
                     <td>
                         <div *ngIf="basket.orderId">

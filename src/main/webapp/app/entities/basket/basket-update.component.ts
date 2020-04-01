@@ -21,7 +21,6 @@ export class BasketUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    basketId: [null, [Validators.required]],
     basketState: [null, [Validators.required]],
     orderId: []
   });
@@ -64,7 +63,6 @@ export class BasketUpdateComponent implements OnInit {
   updateForm(basket: IBasket): void {
     this.editForm.patchValue({
       id: basket.id,
-      basketId: basket.basketId,
       basketState: basket.basketState,
       orderId: basket.orderId
     });
@@ -88,7 +86,6 @@ export class BasketUpdateComponent implements OnInit {
     return {
       ...new Basket(),
       id: this.editForm.get(['id'])!.value,
-      basketId: this.editForm.get(['basketId'])!.value,
       basketState: this.editForm.get(['basketState'])!.value,
       orderId: this.editForm.get(['orderId'])!.value
     };

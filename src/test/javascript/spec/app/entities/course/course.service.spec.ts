@@ -26,7 +26,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Course(0, 0, DeliveryState.PENDINGDELIVERER, PaymentMethod.CB, currentDate, currentDate, currentDate, currentDate);
+      elemDefault = new Course(0, DeliveryState.PENDINGDELIVERER, PaymentMethod.CB, currentDate, currentDate, currentDate, currentDate);
     });
 
     describe('Service methods', () => {
@@ -80,7 +80,6 @@ describe('Service Tests', () => {
       it('should update a Course', () => {
         const returnedFromService = Object.assign(
           {
-            courseId: 1,
             state: 'BBBBBB',
             paymentMethod: 'BBBBBB',
             estimatedPreparationTime: currentDate.format(DATE_TIME_FORMAT),
@@ -111,7 +110,6 @@ describe('Service Tests', () => {
       it('should return a list of Course', () => {
         const returnedFromService = Object.assign(
           {
-            courseId: 1,
             state: 'BBBBBB',
             paymentMethod: 'BBBBBB',
             estimatedPreparationTime: currentDate.format(DATE_TIME_FORMAT),

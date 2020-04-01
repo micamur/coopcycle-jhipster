@@ -72,7 +72,6 @@ class CooperativeGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "cooperativeId":null
                 , "name":"SAMPLE_TEXT"
                 , "area":"SAMPLE_TEXT"
                 }""")).asJson

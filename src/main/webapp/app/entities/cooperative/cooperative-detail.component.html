@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="coopcycleApp.cooperative.cooperativeId">Cooperative Id</span></dt>
-                <dd>
-                    <span>{{ cooperative.cooperativeId }}</span>
-                </dd>
                 <dt><span jhiTranslate="coopcycleApp.cooperative.name">Name</span></dt>
                 <dd>
                     <span>{{ cooperative.name }}</span>
@@ -22,7 +18,9 @@
                 </dd>
                 <dt><span jhiTranslate="coopcycleApp.cooperative.dg">Dg</span></dt>
                 <dd>
-                    {{ cooperative.dg?.id }}
+                    <div *ngIf="cooperative.dg">
+                        <a [routerLink]="['/user-account', cooperative.dg?.id, 'view']">{{ cooperative.dg?.id }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="coopcycleApp.cooperative.restaurant">Restaurant</span></dt>
                 <dd>
@@ -33,13 +31,13 @@
                 <dt><span jhiTranslate="coopcycleApp.cooperative.adminsys">Adminsys</span></dt>
                 <dd>
                     <span *ngFor="let adminsys of cooperative.adminsys; let last = last">
-                        {{ adminsys.id }}{{ last ? '' : ', ' }}
+                        <a [routerLink]="['/user-account', adminsys?.id, 'view']">{{ adminsys.id }}</a>{{ last ? '' : ', ' }}
                     </span>
                 </dd>
                 <dt><span jhiTranslate="coopcycleApp.cooperative.admincoop">Admincoop</span></dt>
                 <dd>
                     <span *ngFor="let admincoop of cooperative.admincoops; let last = last">
-                        {{ admincoop.id }}{{ last ? '' : ', ' }}
+                        <a [routerLink]="['/user-account', admincoop?.id, 'view']">{{ admincoop.id }}</a>{{ last ? '' : ', ' }}
                     </span>
                 </dd>
             </dl>

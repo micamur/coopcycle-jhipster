@@ -10,13 +10,10 @@
     <!--
         Added the entity Course.
     -->
-    <changeSet id="20200401140400-1" author="jhipster">
+    <changeSet id="20200401163700-1" author="jhipster">
         <createTable tableName="course" remarks="The Course entity.">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
-            </column>
-            <column name="course_id" type="bigint">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_course_course_id" />
             </column>
             <column name="state" type="varchar(255)">
                 <constraints nullable="false" />
@@ -53,7 +50,7 @@
         <dropDefaultValue tableName="course" columnName="delivery_time" columnDataType="datetime"/>
     </changeSet>
 
-    <changeSet id="20200401140400-1-relations" author="jhipster">
+    <changeSet id="20200401163700-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
@@ -66,13 +63,12 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200401140400-1-data" author="jhipster" context="faker">
+    <changeSet id="20200401163700-1-data" author="jhipster" context="faker">
         <loadData
                   file="config/liquibase/fake-data/course.csv"
                   separator=";"
                   tableName="course">
             <column name="id" type="numeric"/>
-            <column name="course_id" type="numeric"/>
             <column name="state" type="string"/>
             <column name="payment_method" type="string"/>
             <column name="estimated_preparation_time" type="datetime"/>

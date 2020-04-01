@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="coopcycleApp.course.courseId">Course Id</span></dt>
-                <dd>
-                    <span>{{ course.courseId }}</span>
-                </dd>
                 <dt><span jhiTranslate="coopcycleApp.course.state">State</span></dt>
                 <dd>
                     <span jhiTranslate="{{ 'coopcycleApp.DeliveryState.' + course.state }}">{{ course.state }}</span>
@@ -44,11 +40,15 @@
                 </dd>
                 <dt><span jhiTranslate="coopcycleApp.course.deliverer">Deliverer</span></dt>
                 <dd>
-                    {{ course.deliverer?.id }}
+                    <div *ngIf="course.deliverer">
+                        <a [routerLink]="['/user-account', course.deliverer?.id, 'view']">{{ course.deliverer?.id }}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="coopcycleApp.course.customer">Customer</span></dt>
                 <dd>
-                    {{ course.customer?.id }}
+                    <div *ngIf="course.customer">
+                        <a [routerLink]="['/user-account', course.customer?.id, 'view']">{{ course.customer?.id }}</a>
+                    </div>
                 </dd>
             </dl>
 

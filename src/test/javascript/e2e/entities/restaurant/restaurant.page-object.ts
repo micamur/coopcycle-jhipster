@@ -29,7 +29,6 @@ export class RestaurantUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  restaurantIdInput = element(by.id('field_restaurantId'));
   nameInput = element(by.id('field_name'));
   descriptionInput = element(by.id('field_description'));
 
@@ -37,14 +36,6 @@ export class RestaurantUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
-  }
-
-  async setRestaurantIdInput(restaurantId: string): Promise<void> {
-    await this.restaurantIdInput.sendKeys(restaurantId);
-  }
-
-  async getRestaurantIdInput(): Promise<string> {
-    return await this.restaurantIdInput.getAttribute('value');
   }
 
   async setNameInput(name: string): Promise<void> {

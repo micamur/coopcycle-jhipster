@@ -29,7 +29,6 @@ export class CooperativeUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  cooperativeIdInput = element(by.id('field_cooperativeId'));
   nameInput = element(by.id('field_name'));
   areaInput = element(by.id('field_area'));
 
@@ -40,14 +39,6 @@ export class CooperativeUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
-  }
-
-  async setCooperativeIdInput(cooperativeId: string): Promise<void> {
-    await this.cooperativeIdInput.sendKeys(cooperativeId);
-  }
-
-  async getCooperativeIdInput(): Promise<string> {
-    return await this.cooperativeIdInput.getAttribute('value');
   }
 
   async setNameInput(name: string): Promise<void> {

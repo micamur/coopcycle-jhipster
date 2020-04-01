@@ -2,14 +2,6 @@
     "name": "Course",
     "fields": [
         {
-            "fieldName": "courseId",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "unique"
-            ]
-        },
-        {
             "fieldName": "state",
             "fieldType": "DeliveryState",
             "fieldValues": "PENDINGDELIVERER,PENDINGPREPARATION,INPROGRESS,COMPLETED",
@@ -64,14 +56,14 @@
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "course",
             "relationshipName": "deliverer",
             "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "course",
             "relationshipName": "customer",
             "otherEntityField": "id"
@@ -84,7 +76,7 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20200401140400",
+    "changelogDate": "20200401163700",
     "javadoc": "The Course entity.",
     "entityTableName": "course",
     "dto": "no",

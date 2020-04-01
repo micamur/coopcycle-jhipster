@@ -29,7 +29,6 @@ export class ProductUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  productIdInput = element(by.id('field_productId'));
   nameInput = element(by.id('field_name'));
   descriptionInput = element(by.id('field_description'));
   priceInput = element(by.id('field_price'));
@@ -40,14 +39,6 @@ export class ProductUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
-  }
-
-  async setProductIdInput(productId: string): Promise<void> {
-    await this.productIdInput.sendKeys(productId);
-  }
-
-  async getProductIdInput(): Promise<string> {
-    return await this.productIdInput.getAttribute('value');
   }
 
   async setNameInput(name: string): Promise<void> {

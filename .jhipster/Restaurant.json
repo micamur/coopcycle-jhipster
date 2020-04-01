@@ -2,14 +2,6 @@
     "name": "Restaurant",
     "fields": [
         {
-            "fieldName": "restaurantId",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "unique"
-            ]
-        },
-        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -32,7 +24,7 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "restaurant",
             "relationshipName": "owner",
             "otherEntityField": "id"
@@ -46,7 +38,7 @@
             "ownerSide": false
         }
     ],
-    "changelogDate": "20200401140000",
+    "changelogDate": "20200401163300",
     "javadoc": "The Restaurant entity.",
     "entityTableName": "restaurant",
     "dto": "no",

@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Role.
     -->
-    <changeSet id="20200401135800-2" author="jhipster">
+    <changeSet id="20200401163100-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="role_id"
                                  baseTableName="role_account_id"
@@ -18,7 +18,7 @@
                                  baseTableName="role_account_id"
                                  constraintName="fk_role_account_id_account_id_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
         
     </changeSet>
 </databaseChangeLog>

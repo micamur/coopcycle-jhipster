@@ -40,13 +40,7 @@ describe('Basket e2e test', () => {
 
     await basketComponentsPage.clickOnCreateButton();
 
-    await promise.all([
-      basketUpdatePage.setBasketIdInput('5'),
-      basketUpdatePage.basketStateSelectLastOption(),
-      basketUpdatePage.orderIdSelectLastOption()
-    ]);
-
-    expect(await basketUpdatePage.getBasketIdInput()).to.eq('5', 'Expected basketId value to be equals to 5');
+    await promise.all([basketUpdatePage.basketStateSelectLastOption(), basketUpdatePage.orderIdSelectLastOption()]);
 
     await basketUpdatePage.save();
     expect(await basketUpdatePage.getSaveButton().isPresent(), 'Expected save button disappear').to.be.false;

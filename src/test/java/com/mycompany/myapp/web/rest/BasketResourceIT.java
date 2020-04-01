@@ -34,9 +34,6 @@ import com.mycompany.myapp.domain.enumeration.BasketState;
 @SpringBootTest(classes = CoopcycleApp.class)
 public class BasketResourceIT {
 
-    private static final Long DEFAULT_BASKET_ID = 1L;
-    private static final Long UPDATED_BASKET_ID = 2L;
-
     private static final BasketState DEFAULT_BASKET_STATE = BasketState.NOTFINISHED;
     private static final BasketState UPDATED_BASKET_STATE = BasketState.VALIDATED;
 
@@ -82,7 +79,6 @@ public class BasketResourceIT {
      */
     public static Basket createEntity(EntityManager em) {
         Basket basket = new Basket()
-            .basketId(DEFAULT_BASKET_ID)
             .basketState(DEFAULT_BASKET_STATE);
         return basket;
     }
@@ -94,7 +90,6 @@ public class BasketResourceIT {
      */
     public static Basket createUpdatedEntity(EntityManager em) {
         Basket basket = new Basket()
-            .basketId(UPDATED_BASKET_ID)
             .basketState(UPDATED_BASKET_STATE);
         return basket;
     }
@@ -119,7 +114,6 @@ public class BasketResourceIT {
         List<Basket> basketList = basketRepository.findAll();
         assertThat(basketList).hasSize(databaseSizeBeforeCreate + 1);
         Basket testBasket = basketList.get(basketList.size() - 1);
-        assertThat(testBasket.getBasketId()).isEqualTo(DEFAULT_BASKET_ID);
         assertThat(testBasket.getBasketState()).isEqualTo(DEFAULT_BASKET_STATE);
     }
 
@@ -142,24 +136,6 @@ public class BasketResourceIT {
         assertThat(basketList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkBasketIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = basketRepository.findAll().size();
-        // set the field null
-        basket.setBasketId(null);
-
-        // Create the Basket, which fails.
-
-        restBasketMockMvc.perform(post("/api/baskets")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(basket)))
-            .andExpect(status().isBadRequest());
-
-        List<Basket> basketList = basketRepository.findAll();
-        assertThat(basketList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -190,7 +166,6 @@ public class BasketResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(basket.getId().intValue())))
-            .andExpect(jsonPath("$.[*].basketId").value(hasItem(DEFAULT_BASKET_ID.intValue())))
             .andExpect(jsonPath("$.[*].basketState").value(hasItem(DEFAULT_BASKET_STATE.toString())));
     }
     
@@ -205,7 +180,6 @@ public class BasketResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(basket.getId().intValue()))
-            .andExpect(jsonPath("$.basketId").value(DEFAULT_BASKET_ID.intValue()))
             .andExpect(jsonPath("$.basketState").value(DEFAULT_BASKET_STATE.toString()));
     }
 
@@ -230,7 +204,6 @@ public class BasketResourceIT {
         // Disconnect from session so that the updates on updatedBasket are not directly saved in db
         em.detach(updatedBasket);
         updatedBasket
-            .basketId(UPDATED_BASKET_ID)
             .basketState(UPDATED_BASKET_STATE);
 
         restBasketMockMvc.perform(put("/api/baskets")
@@ -242,7 +215,6 @@ public class BasketResourceIT {
         List<Basket> basketList = basketRepository.findAll();
         assertThat(basketList).hasSize(databaseSizeBeforeUpdate);
         Basket testBasket = basketList.get(basketList.size() - 1);
-        assertThat(testBasket.getBasketId()).isEqualTo(UPDATED_BASKET_ID);
         assertThat(testBasket.getBasketState()).isEqualTo(UPDATED_BASKET_STATE);
     }
 

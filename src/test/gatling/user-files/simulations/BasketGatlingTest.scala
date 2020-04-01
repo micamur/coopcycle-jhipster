@@ -72,7 +72,6 @@ class BasketGatlingTest extends Simulation {
             .headers(headers_http_authenticated)
             .body(StringBody("""{
                 "id":null
-                , "basketId":null
                 , "basketState":"NOTFINISHED"
                 }""")).asJson
             .check(status.is(201))

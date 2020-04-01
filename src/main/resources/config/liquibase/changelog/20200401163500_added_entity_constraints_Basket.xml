@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Basket.
     -->
-    <changeSet id="20200401140200-2" author="jhipster">
+    <changeSet id="20200401163500-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="order_id_id"
                                  baseTableName="basket"

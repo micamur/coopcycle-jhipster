@@ -9,6 +9,10 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./role/role.module').then(m => m.CoopcycleRoleModule)
       },
       {
+        path: 'user-account',
+        loadChildren: () => import('./user-account/user-account.module').then(m => m.CoopcycleUserAccountModule)
+      },
+      {
         path: 'restaurant',
         loadChildren: () => import('./restaurant/restaurant.module').then(m => m.CoopcycleRestaurantModule)
       },

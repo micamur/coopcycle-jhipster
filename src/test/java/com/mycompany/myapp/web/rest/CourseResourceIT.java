@@ -37,9 +37,6 @@ import com.mycompany.myapp.domain.enumeration.PaymentMethod;
 @SpringBootTest(classes = CoopcycleApp.class)
 public class CourseResourceIT {
 
-    private static final Long DEFAULT_COURSE_ID = 1L;
-    private static final Long UPDATED_COURSE_ID = 2L;
-
     private static final DeliveryState DEFAULT_STATE = DeliveryState.PENDINGDELIVERER;
     private static final DeliveryState UPDATED_STATE = DeliveryState.PENDINGPREPARATION;
 
@@ -100,7 +97,6 @@ public class CourseResourceIT {
      */
     public static Course createEntity(EntityManager em) {
         Course course = new Course()
-            .courseId(DEFAULT_COURSE_ID)
             .state(DEFAULT_STATE)
             .paymentMethod(DEFAULT_PAYMENT_METHOD)
             .estimatedPreparationTime(DEFAULT_ESTIMATED_PREPARATION_TIME)
@@ -117,7 +113,6 @@ public class CourseResourceIT {
      */
     public static Course createUpdatedEntity(EntityManager em) {
         Course course = new Course()
-            .courseId(UPDATED_COURSE_ID)
             .state(UPDATED_STATE)
             .paymentMethod(UPDATED_PAYMENT_METHOD)
             .estimatedPreparationTime(UPDATED_ESTIMATED_PREPARATION_TIME)
@@ -147,7 +142,6 @@ public class CourseResourceIT {
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeCreate + 1);
         Course testCourse = courseList.get(courseList.size() - 1);
-        assertThat(testCourse.getCourseId()).isEqualTo(DEFAULT_COURSE_ID);
         assertThat(testCourse.getState()).isEqualTo(DEFAULT_STATE);
         assertThat(testCourse.getPaymentMethod()).isEqualTo(DEFAULT_PAYMENT_METHOD);
         assertThat(testCourse.getEstimatedPreparationTime()).isEqualTo(DEFAULT_ESTIMATED_PREPARATION_TIME);
@@ -175,24 +169,6 @@ public class CourseResourceIT {
         assertThat(courseList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkCourseIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = courseRepository.findAll().size();
-        // set the field null
-        course.setCourseId(null);
-
-        // Create the Course, which fails.
-
-        restCourseMockMvc.perform(post("/api/courses")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(course)))
-            .andExpect(status().isBadRequest());
-
-        List<Course> courseList = courseRepository.findAll();
-        assertThat(courseList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -313,7 +289,6 @@ public class CourseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(course.getId().intValue())))
-            .andExpect(jsonPath("$.[*].courseId").value(hasItem(DEFAULT_COURSE_ID.intValue())))
             .andExpect(jsonPath("$.[*].state").value(hasItem(DEFAULT_STATE.toString())))
             .andExpect(jsonPath("$.[*].paymentMethod").value(hasItem(DEFAULT_PAYMENT_METHOD.toString())))
             .andExpect(jsonPath("$.[*].estimatedPreparationTime").value(hasItem(DEFAULT_ESTIMATED_PREPARATION_TIME.toString())))
@@ -333,7 +308,6 @@ public class CourseResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(course.getId().intValue()))
-            .andExpect(jsonPath("$.courseId").value(DEFAULT_COURSE_ID.intValue()))
             .andExpect(jsonPath("$.state").value(DEFAULT_STATE.toString()))
             .andExpect(jsonPath("$.paymentMethod").value(DEFAULT_PAYMENT_METHOD.toString()))
             .andExpect(jsonPath("$.estimatedPreparationTime").value(DEFAULT_ESTIMATED_PREPARATION_TIME.toString()))
@@ -363,7 +337,6 @@ public class CourseResourceIT {
         // Disconnect from session so that the updates on updatedCourse are not directly saved in db
         em.detach(updatedCourse);
         updatedCourse
-            .courseId(UPDATED_COURSE_ID)
             .state(UPDATED_STATE)
             .paymentMethod(UPDATED_PAYMENT_METHOD)
             .estimatedPreparationTime(UPDATED_ESTIMATED_PREPARATION_TIME)
@@ -380,7 +353,6 @@ public class CourseResourceIT {
         List<Course> courseList = courseRepository.findAll();
         assertThat(courseList).hasSize(databaseSizeBeforeUpdate);
         Course testCourse = courseList.get(courseList.size() - 1);
-        assertThat(testCourse.getCourseId()).isEqualTo(UPDATED_COURSE_ID);
         assertThat(testCourse.getState()).isEqualTo(UPDATED_STATE);
         assertThat(testCourse.getPaymentMethod()).isEqualTo(UPDATED_PAYMENT_METHOD);
         assertThat(testCourse.getEstimatedPreparationTime()).isEqualTo(UPDATED_ESTIMATED_PREPARATION_TIME);

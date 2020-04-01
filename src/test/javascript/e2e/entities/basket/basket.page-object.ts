@@ -29,21 +29,12 @@ export class BasketUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  basketIdInput = element(by.id('field_basketId'));
   basketStateSelect = element(by.id('field_basketState'));
 
   orderIdSelect = element(by.id('field_orderId'));
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
-  }
-
-  async setBasketIdInput(basketId: string): Promise<void> {
-    await this.basketIdInput.sendKeys(basketId);
-  }
-
-  async getBasketIdInput(): Promise<string> {
-    return await this.basketIdInput.getAttribute('value');
   }
 
   async setBasketStateSelect(basketState: string): Promise<void> {

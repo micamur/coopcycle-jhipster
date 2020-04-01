@@ -21,7 +21,7 @@ describe('Service Tests', () => {
       service = injector.get(BasketService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Basket(0, 0, BasketState.NOTFINISHED);
+      elemDefault = new Basket(0, BasketState.NOTFINISHED);
     });
 
     describe('Service methods', () => {
@@ -55,7 +55,6 @@ describe('Service Tests', () => {
       it('should update a Basket', () => {
         const returnedFromService = Object.assign(
           {
-            basketId: 1,
             basketState: 'BBBBBB'
           },
           elemDefault
@@ -73,7 +72,6 @@ describe('Service Tests', () => {
       it('should return a list of Basket', () => {
         const returnedFromService = Object.assign(
           {
-            basketId: 1,
             basketState: 'BBBBBB'
           },
           elemDefault

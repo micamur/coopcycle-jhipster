@@ -33,10 +33,6 @@ public class Course implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "course_id", nullable = false, unique = true)
-    private Long courseId;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "state", nullable = false)
     private DeliveryState state;
@@ -68,11 +64,11 @@ public class Course implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("courses")
-    private User deliverer;
+    private UserAccount deliverer;
 
     @ManyToOne
     @JsonIgnoreProperties("courses")
-    private User customer;
+    private UserAccount customer;
 
     @OneToOne(mappedBy = "orderId")
     @JsonIgnore
@@ -85,19 +81,6 @@ public class Course implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCourseId() {
-        return courseId;
-    }
-
-    public Course courseId(Long courseId) {
-        this.courseId = courseId;
-        return this;
-    }
-
-    public void setCourseId(Long courseId) {
-        this.courseId = courseId;
     }
 
     public DeliveryState getState() {
@@ -191,30 +174,30 @@ public class Course implements Serializable {
         this.restaurant = restaurant;
     }
 
-    public User getDeliverer() {
+    public UserAccount getDeliverer() {
         return deliverer;
     }
 
-    public Course deliverer(User user) {
-        this.deliverer = user;
+    public Course deliverer(UserAccount userAccount) {
+        this.deliverer = userAccount;
         return this;
     }
 
-    public void setDeliverer(User user) {
-        this.deliverer = user;
+    public void setDeliverer(UserAccount userAccount) {
+        this.deliverer = userAccount;
     }
 
-    public User getCustomer() {
+    public UserAccount getCustomer() {
         return customer;
     }
 
-    public Course customer(User user) {
-        this.customer = user;
+    public Course customer(UserAccount userAccount) {
+        this.customer = userAccount;
         return this;
     }
 
-    public void setCustomer(User user) {
-        this.customer = user;
+    public void setCustomer(UserAccount userAccount) {
+        this.customer = userAccount;
     }
 
     public Basket getBasketId() {
@@ -251,7 +234,6 @@ public class Course implements Serializable {
     public String toString() {
         return "Course{" +
             "id=" + getId() +
-            ", courseId=" + getCourseId() +
             ", state='" + getState() + "'" +
             ", paymentMethod='" + getPaymentMethod() + "'" +
             ", estimatedPreparationTime='" + getEstimatedPreparationTime() + "'" +

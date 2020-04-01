@@ -16,7 +16,6 @@
       "detail": {
         "title": "Restaurant"
       },
-      "restaurantId": "Restaurant Id",
       "name": "Name",
       "description": "Description",
       "owner": "Owner",

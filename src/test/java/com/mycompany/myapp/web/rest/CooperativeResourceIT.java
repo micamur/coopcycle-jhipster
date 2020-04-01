@@ -38,9 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CoopcycleApp.class)
 public class CooperativeResourceIT {
 
-    private static final Long DEFAULT_COOPERATIVE_ID = 1L;
-    private static final Long UPDATED_COOPERATIVE_ID = 2L;
-
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -92,7 +89,6 @@ public class CooperativeResourceIT {
      */
     public static Cooperative createEntity(EntityManager em) {
         Cooperative cooperative = new Cooperative()
-            .cooperativeId(DEFAULT_COOPERATIVE_ID)
             .name(DEFAULT_NAME)
             .area(DEFAULT_AREA);
         return cooperative;
@@ -105,7 +101,6 @@ public class CooperativeResourceIT {
      */
     public static Cooperative createUpdatedEntity(EntityManager em) {
         Cooperative cooperative = new Cooperative()
-            .cooperativeId(UPDATED_COOPERATIVE_ID)
             .name(UPDATED_NAME)
             .area(UPDATED_AREA);
         return cooperative;
@@ -131,7 +126,6 @@ public class CooperativeResourceIT {
         List<Cooperative> cooperativeList = cooperativeRepository.findAll();
         assertThat(cooperativeList).hasSize(databaseSizeBeforeCreate + 1);
         Cooperative testCooperative = cooperativeList.get(cooperativeList.size() - 1);
-        assertThat(testCooperative.getCooperativeId()).isEqualTo(DEFAULT_COOPERATIVE_ID);
         assertThat(testCooperative.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testCooperative.getArea()).isEqualTo(DEFAULT_AREA);
     }
@@ -155,24 +149,6 @@ public class CooperativeResourceIT {
         assertThat(cooperativeList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkCooperativeIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = cooperativeRepository.findAll().size();
-        // set the field null
-        cooperative.setCooperativeId(null);
-
-        // Create the Cooperative, which fails.
-
-        restCooperativeMockMvc.perform(post("/api/cooperatives")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(cooperative)))
-            .andExpect(status().isBadRequest());
-
-        List<Cooperative> cooperativeList = cooperativeRepository.findAll();
-        assertThat(cooperativeList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -221,7 +197,6 @@ public class CooperativeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cooperative.getId().intValue())))
-            .andExpect(jsonPath("$.[*].cooperativeId").value(hasItem(DEFAULT_COOPERATIVE_ID.intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA)));
     }
@@ -270,7 +245,6 @@ public class CooperativeResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(cooperative.getId().intValue()))
-            .andExpect(jsonPath("$.cooperativeId").value(DEFAULT_COOPERATIVE_ID.intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.area").value(DEFAULT_AREA));
     }
@@ -296,7 +270,6 @@ public class CooperativeResourceIT {
         // Disconnect from session so that the updates on updatedCooperative are not directly saved in db
         em.detach(updatedCooperative);
         updatedCooperative
-            .cooperativeId(UPDATED_COOPERATIVE_ID)
             .name(UPDATED_NAME)
             .area(UPDATED_AREA);
 
@@ -309,7 +282,6 @@ public class CooperativeResourceIT {
         List<Cooperative> cooperativeList = cooperativeRepository.findAll();
         assertThat(cooperativeList).hasSize(databaseSizeBeforeUpdate);
         Cooperative testCooperative = cooperativeList.get(cooperativeList.size() - 1);
-        assertThat(testCooperative.getCooperativeId()).isEqualTo(UPDATED_COOPERATIVE_ID);
         assertThat(testCooperative.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testCooperative.getArea()).isEqualTo(UPDATED_AREA);
     }

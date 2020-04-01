@@ -2,14 +2,6 @@
     "name": "Cooperative",
     "fields": [
         {
-            "fieldName": "cooperativeId",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "unique"
-            ]
-        },
-        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -31,7 +23,7 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "cooperative",
             "relationshipName": "dg",
             "otherEntityField": "id"
@@ -46,7 +38,7 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "adminsys",
             "relationshipName": "adminsys",
             "otherEntityField": "id",
@@ -54,14 +46,14 @@
         },
         {
             "relationshipType": "many-to-many",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "admincoop",
             "relationshipName": "admincoop",
             "otherEntityField": "id",
             "ownerSide": true
         }
     ],
-    "changelogDate": "20200401140100",
+    "changelogDate": "20200401163400",
     "javadoc": "The Cooperative entity.",
     "entityTableName": "cooperative",
     "dto": "no",

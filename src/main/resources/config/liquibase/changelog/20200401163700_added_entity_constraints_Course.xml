@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity Course.
     -->
-    <changeSet id="20200401140400-2" author="jhipster">
+    <changeSet id="20200401163700-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="restaurant_id"
                                  baseTableName="course"
@@ -18,13 +18,13 @@
                                  baseTableName="course"
                                  constraintName="fk_course_deliverer_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
 
         <addForeignKeyConstraint baseColumnNames="customer_id"
                                  baseTableName="course"
                                  constraintName="fk_course_customer_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
 
     </changeSet>
 </databaseChangeLog>

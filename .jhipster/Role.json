@@ -13,14 +13,14 @@
     "relationships": [
         {
             "relationshipType": "many-to-many",
-            "otherEntityName": "user",
+            "otherEntityName": "userAccount",
             "otherEntityRelationshipName": "role",
             "relationshipName": "accountId",
             "otherEntityField": "id",
             "ownerSide": true
         }
     ],
-    "changelogDate": "20200401135800",
+    "changelogDate": "20200401163100",
     "entityTableName": "role",
     "dto": "no",
     "pagination": "no",

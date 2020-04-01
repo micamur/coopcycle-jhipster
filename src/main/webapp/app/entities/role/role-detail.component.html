@@ -15,7 +15,7 @@
                 <dt><span jhiTranslate="coopcycleApp.role.accountId">Account Id</span></dt>
                 <dd>
                     <span *ngFor="let accountId of role.accountIds; let last = last">
-                        {{ accountId.id }}{{ last ? '' : ', ' }}
+                        <a [routerLink]="['/user-account', accountId?.id, 'view']">{{ accountId.id }}</a>{{ last ? '' : ', ' }}
                     </span>
                 </dd>
             </dl>

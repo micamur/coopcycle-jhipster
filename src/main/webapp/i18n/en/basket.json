@@ -16,7 +16,6 @@
       "detail": {
         "title": "Basket"
       },
-      "basketId": "Basket Id",
       "basketState": "Basket State",
       "orderId": "Order Id",
       "product": "Product"

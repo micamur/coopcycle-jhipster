@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="coopcycleApp.cooperative.cooperativeId">Cooperative Id</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.cooperative.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.cooperative.area">Area</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.cooperative.dg">Dg</span></th>
@@ -36,11 +35,12 @@
             <tbody>
                 <tr *ngFor="let cooperative of cooperatives ;trackBy: trackId">
                     <td><a [routerLink]="['/cooperative', cooperative.id, 'view']">{{ cooperative.id }}</a></td>
-                    <td>{{ cooperative.cooperativeId }}</td>
                     <td>{{ cooperative.name }}</td>
                     <td>{{ cooperative.area }}</td>
                     <td>
-                        {{ cooperative.dg?.id }}
+                        <div *ngIf="cooperative.dg">
+                            <a [routerLink]="['/user-account', cooperative.dg?.id, 'view']" >{{ cooperative.dg?.id }}</a>
+                        </div>
                     </td>
                     <td>
                         <span *ngFor="let restaurant of cooperative.restaurants; let last = last">
@@ -49,12 +49,12 @@
                     </td>
                     <td>
                         <span *ngFor="let adminsys of cooperative.adminsys; let last = last">
-                            {{ adminsys.id }}{{ last ? '' : ', ' }}
+                            <a class="form-control-static" [routerLink]="['/user-account', adminsys?.id, 'view']">{{ adminsys.id }}</a>{{ last ? '' : ', ' }}
                         </span>
                     </td>
                     <td>
                         <span *ngFor="let admincoop of cooperative.admincoops; let last = last">
-                            {{ admincoop.id }}{{ last ? '' : ', ' }}
+                            <a class="form-control-static" [routerLink]="['/user-account', admincoop?.id, 'view']">{{ admincoop.id }}</a>{{ last ? '' : ', ' }}
                         </span>
                     </td>
                     <td class="text-right">

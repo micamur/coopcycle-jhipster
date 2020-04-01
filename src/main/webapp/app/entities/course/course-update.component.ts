@@ -11,10 +11,10 @@ import { ICourse, Course } from 'app/shared/model/course.model';
 import { CourseService } from './course.service';
 import { IRestaurant } from 'app/shared/model/restaurant.model';
 import { RestaurantService } from 'app/entities/restaurant/restaurant.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import { IUserAccount } from 'app/shared/model/user-account.model';
+import { UserAccountService } from 'app/entities/user-account/user-account.service';
 
-type SelectableEntity = IRestaurant | IUser;
+type SelectableEntity = IRestaurant | IUserAccount;
 
 @Component({
   selector: 'jhi-course-update',
@@ -23,11 +23,10 @@ type SelectableEntity = IRestaurant | IUser;
 export class CourseUpdateComponent implements OnInit {
   isSaving = false;
   restaurants: IRestaurant[] = [];
-  users: IUser[] = [];
+  useraccounts: IUserAccount[] = [];
 
   editForm = this.fb.group({
     id: [],
-    courseId: [null, [Validators.required]],
     state: [null, [Validators.required]],
     paymentMethod: [null, [Validators.required]],
     estimatedPreparationTime: [null, [Validators.required]],
@@ -42,7 +41,7 @@ export class CourseUpdateComponent implements OnInit {
   constructor(
     protected courseService: CourseService,
     protected restaurantService: RestaurantService,
-    protected userService: UserService,
+    protected userAccountService: UserAccountService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -61,14 +60,13 @@ export class CourseUpdateComponent implements OnInit {
 
       this.restaurantService.query().subscribe((res: HttpResponse<IRestaurant[]>) => (this.restaurants = res.body || []));
 
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+      this.userAccountService.query().subscribe((res: HttpResponse<IUserAccount[]>) => (this.useraccounts = res.body || []));
     });
   }
 
   updateForm(course: ICourse): void {
     this.editForm.patchValue({
       id: course.id,
-      courseId: course.courseId,
       state: course.state,
       paymentMethod: course.paymentMethod,
       estimatedPreparationTime: course.estimatedPreparationTime ? course.estimatedPreparationTime.format(DATE_TIME_FORMAT) : null,
@@ -99,7 +97,6 @@ export class CourseUpdateComponent implements OnInit {
     return {
       ...new Course(),
       id: this.editForm.get(['id'])!.value,
-      courseId: this.editForm.get(['courseId'])!.value,
       state: this.editForm.get(['state'])!.value,
       paymentMethod: this.editForm.get(['paymentMethod'])!.value,
       estimatedPreparationTime: this.editForm.get(['estimatedPreparationTime'])!.value

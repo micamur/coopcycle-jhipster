@@ -7,8 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IRole, Role } from 'app/shared/model/role.model';
 import { RoleService } from './role.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import { IUserAccount } from 'app/shared/model/user-account.model';
+import { UserAccountService } from 'app/entities/user-account/user-account.service';
 
 @Component({
   selector: 'jhi-role-update',
@@ -16,7 +16,7 @@ import { UserService } from 'app/core/user/user.service';
 })
 export class RoleUpdateComponent implements OnInit {
   isSaving = false;
-  users: IUser[] = [];
+  useraccounts: IUserAccount[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -26,7 +26,7 @@ export class RoleUpdateComponent implements OnInit {
 
   constructor(
     protected roleService: RoleService,
-    protected userService: UserService,
+    protected userAccountService: UserAccountService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -35,7 +35,7 @@ export class RoleUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ role }) => {
       this.updateForm(role);
 
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+      this.userAccountService.query().subscribe((res: HttpResponse<IUserAccount[]>) => (this.useraccounts = res.body || []));
     });
   }
 
@@ -86,11 +86,11 @@ export class RoleUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IUser): any {
+  trackById(index: number, item: IUserAccount): any {
     return item.id;
   }
 
-  getSelected(selectedVals: IUser[], option: IUser): IUser {
+  getSelected(selectedVals: IUserAccount[], option: IUserAccount): IUserAccount {
     if (selectedVals) {
       for (let i = 0; i < selectedVals.length; i++) {
         if (option.id === selectedVals[i].id) {

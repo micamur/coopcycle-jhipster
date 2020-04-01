@@ -34,7 +34,7 @@
                     <td jhiTranslate="{{ 'coopcycleApp.RoleOption.' + role.role }}">{{ role.role }}</td>
                     <td>
                         <span *ngFor="let accountId of role.accountIds; let last = last">
-                            {{ accountId.id }}{{ last ? '' : ', ' }}
+                            <a class="form-control-static" [routerLink]="['/user-account', accountId?.id, 'view']">{{ accountId.id }}</a>{{ last ? '' : ', ' }}
                         </span>
                     </td>
                     <td class="text-right">

@@ -1,26 +1,24 @@
-import { IUser } from 'app/core/user/user.model';
+import { IUserAccount } from 'app/shared/model/user-account.model';
 import { IRestaurant } from 'app/shared/model/restaurant.model';
 
 export interface ICooperative {
   id?: number;
-  cooperativeId?: number;
   name?: string;
   area?: string;
-  dg?: IUser;
+  dg?: IUserAccount;
   restaurants?: IRestaurant[];
-  adminsys?: IUser[];
-  admincoops?: IUser[];
+  adminsys?: IUserAccount[];
+  admincoops?: IUserAccount[];
 }
 
 export class Cooperative implements ICooperative {
   constructor(
     public id?: number,
-    public cooperativeId?: number,
     public name?: string,
     public area?: string,
-    public dg?: IUser,
+    public dg?: IUserAccount,
     public restaurants?: IRestaurant[],
-    public adminsys?: IUser[],
-    public admincoops?: IUser[]
+    public adminsys?: IUserAccount[],
+    public admincoops?: IUserAccount[]
   ) {}
 }

@@ -41,7 +41,6 @@ describe('Product e2e test', () => {
     await productComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      productUpdatePage.setProductIdInput('5'),
       productUpdatePage.setNameInput('name'),
       productUpdatePage.setDescriptionInput('description'),
       productUpdatePage.setPriceInput('5'),
@@ -50,7 +49,6 @@ describe('Product e2e test', () => {
       // productUpdatePage.basketSelectLastOption(),
     ]);
 
-    expect(await productUpdatePage.getProductIdInput()).to.eq('5', 'Expected productId value to be equals to 5');
     expect(await productUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await productUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
     expect(await productUpdatePage.getPriceInput()).to.eq('5', 'Expected price value to be equals to 5');

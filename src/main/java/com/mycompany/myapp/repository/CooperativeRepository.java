@@ -17,9 +17,6 @@ import java.util.Optional;
 @Repository
 public interface CooperativeRepository extends JpaRepository<Cooperative, Long> {
 
-    @Query("select cooperative from Cooperative cooperative where cooperative.dg.login = ?#{principal.username}")
-    List<Cooperative> findByDgIsCurrentUser();
-
     @Query(value = "select distinct cooperative from Cooperative cooperative left join fetch cooperative.restaurants left join fetch cooperative.adminsys left join fetch cooperative.admincoops",
         countQuery = "select count(distinct cooperative) from Cooperative cooperative")
     Page<Cooperative> findAllWithEagerRelationships(Pageable pageable);

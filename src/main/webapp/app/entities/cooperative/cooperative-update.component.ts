@@ -7,12 +7,12 @@ import { Observable } from 'rxjs';
 
 import { ICooperative, Cooperative } from 'app/shared/model/cooperative.model';
 import { CooperativeService } from './cooperative.service';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import { IUserAccount } from 'app/shared/model/user-account.model';
+import { UserAccountService } from 'app/entities/user-account/user-account.service';
 import { IRestaurant } from 'app/shared/model/restaurant.model';
 import { RestaurantService } from 'app/entities/restaurant/restaurant.service';
 
-type SelectableEntity = IUser | IRestaurant;
+type SelectableEntity = IUserAccount | IRestaurant;
 
 @Component({
   selector: 'jhi-cooperative-update',
@@ -20,12 +20,11 @@ type SelectableEntity = IUser | IRestaurant;
 })
 export class CooperativeUpdateComponent implements OnInit {
   isSaving = false;
-  users: IUser[] = [];
+  useraccounts: IUserAccount[] = [];
   restaurants: IRestaurant[] = [];
 
   editForm = this.fb.group({
     id: [],
-    cooperativeId: [null, [Validators.required]],
     name: [null, [Validators.required, Validators.minLength(1)]],
     area: [null, [Validators.required, Validators.minLength(1)]],
     dg: [],
@@ -36,7 +35,7 @@ export class CooperativeUpdateComponent implements OnInit {
 
   constructor(
     protected cooperativeService: CooperativeService,
-    protected userService: UserService,
+    protected userAccountService: UserAccountService,
     protected restaurantService: RestaurantService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -46,7 +45,7 @@ export class CooperativeUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ cooperative }) => {
       this.updateForm(cooperative);
 
-      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
+      this.userAccountService.query().subscribe((res: HttpResponse<IUserAccount[]>) => (this.useraccounts = res.body || []));
 
       this.restaurantService.query().subscribe((res: HttpResponse<IRestaurant[]>) => (this.restaurants = res.body || []));
     });
@@ -55,7 +54,6 @@ export class CooperativeUpdateComponent implements OnInit {
   updateForm(cooperative: ICooperative): void {
     this.editForm.patchValue({
       id: cooperative.id,
-      cooperativeId: cooperative.cooperativeId,
       name: cooperative.name,
       area: cooperative.area,
       dg: cooperative.dg,
@@ -83,7 +81,6 @@ export class CooperativeUpdateComponent implements OnInit {
     return {
       ...new Cooperative(),
       id: this.editForm.get(['id'])!.value,
-      cooperativeId: this.editForm.get(['cooperativeId'])!.value,
       name: this.editForm.get(['name'])!.value,
       area: this.editForm.get(['area'])!.value,
       dg: this.editForm.get(['dg'])!.value,

@@ -2,14 +2,6 @@
     "name": "Product",
     "fields": [
         {
-            "fieldName": "productId",
-            "fieldType": "Long",
-            "fieldValidateRules": [
-                "required",
-                "unique"
-            ]
-        },
-        {
             "fieldName": "name",
             "fieldType": "String",
             "fieldValidateRules": [
@@ -30,7 +22,7 @@
         },
         {
             "fieldName": "price",
-            "fieldType": "BigDecimal",
+            "fieldType": "Float",
             "fieldValidateRules": [
                 "required",
                 "min"
@@ -63,7 +55,7 @@
             "ownerSide": true
         }
     ],
-    "changelogDate": "20200401140300",
+    "changelogDate": "20200401163600",
     "javadoc": "The Product entity.",
     "entityTableName": "product",
     "dto": "no",

@@ -16,7 +16,6 @@
       "detail": {
         "title": "Course"
       },
-      "courseId": "Course Id",
       "state": "State",
       "paymentMethod": "Payment Method",
       "estimatedPreparationTime": "Estimated Preparation Time",

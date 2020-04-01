@@ -37,7 +37,7 @@ public class Role implements Serializable {
     @JoinTable(name = "role_account_id",
                joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
                inverseJoinColumns = @JoinColumn(name = "account_id_id", referencedColumnName = "id"))
-    private Set<User> accountIds = new HashSet<>();
+    private Set<UserAccount> accountIds = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -61,27 +61,29 @@ public class Role implements Serializable {
         this.role = role;
     }
 
-    public Set<User> getAccountIds() {
+    public Set<UserAccount> getAccountIds() {
         return accountIds;
     }
 
-    public Role accountIds(Set<User> users) {
-        this.accountIds = users;
+    public Role accountIds(Set<UserAccount> userAccounts) {
+        this.accountIds = userAccounts;
         return this;
     }
 
-    public Role addAccountId(User user) {
-        this.accountIds.add(user);
+    public Role addAccountId(UserAccount userAccount) {
+        this.accountIds.add(userAccount);
+        userAccount.getRoles().add(this);
         return this;
     }
 
-    public Role removeAccountId(User user) {
-        this.accountIds.remove(user);
+    public Role removeAccountId(UserAccount userAccount) {
+        this.accountIds.remove(userAccount);
+        userAccount.getRoles().remove(this);
         return this;
     }
 
-    public void setAccountIds(Set<User> users) {
-        this.accountIds = users;
+    public void setAccountIds(Set<UserAccount> userAccounts) {
+        this.accountIds = userAccounts;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

@@ -33,9 +33,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CoopcycleApp.class)
 public class RestaurantResourceIT {
 
-    private static final Long DEFAULT_RESTAURANT_ID = 1L;
-    private static final Long UPDATED_RESTAURANT_ID = 2L;
-
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
@@ -84,7 +81,6 @@ public class RestaurantResourceIT {
      */
     public static Restaurant createEntity(EntityManager em) {
         Restaurant restaurant = new Restaurant()
-            .restaurantId(DEFAULT_RESTAURANT_ID)
             .name(DEFAULT_NAME)
             .description(DEFAULT_DESCRIPTION);
         return restaurant;
@@ -97,7 +93,6 @@ public class RestaurantResourceIT {
      */
     public static Restaurant createUpdatedEntity(EntityManager em) {
         Restaurant restaurant = new Restaurant()
-            .restaurantId(UPDATED_RESTAURANT_ID)
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION);
         return restaurant;
@@ -123,7 +118,6 @@ public class RestaurantResourceIT {
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         assertThat(restaurantList).hasSize(databaseSizeBeforeCreate + 1);
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
-        assertThat(testRestaurant.getRestaurantId()).isEqualTo(DEFAULT_RESTAURANT_ID);
         assertThat(testRestaurant.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testRestaurant.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
     }
@@ -147,24 +141,6 @@ public class RestaurantResourceIT {
         assertThat(restaurantList).hasSize(databaseSizeBeforeCreate);
     }
 
-
-    @Test
-    @Transactional
-    public void checkRestaurantIdIsRequired() throws Exception {
-        int databaseSizeBeforeTest = restaurantRepository.findAll().size();
-        // set the field null
-        restaurant.setRestaurantId(null);
-
-        // Create the Restaurant, which fails.
-
-        restRestaurantMockMvc.perform(post("/api/restaurants")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(restaurant)))
-            .andExpect(status().isBadRequest());
-
-        List<Restaurant> restaurantList = restaurantRepository.findAll();
-        assertThat(restaurantList).hasSize(databaseSizeBeforeTest);
-    }
 
     @Test
     @Transactional
@@ -195,7 +171,6 @@ public class RestaurantResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(restaurant.getId().intValue())))
-            .andExpect(jsonPath("$.[*].restaurantId").value(hasItem(DEFAULT_RESTAURANT_ID.intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
@@ -211,7 +186,6 @@ public class RestaurantResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(restaurant.getId().intValue()))
-            .andExpect(jsonPath("$.restaurantId").value(DEFAULT_RESTAURANT_ID.intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
@@ -237,7 +211,6 @@ public class RestaurantResourceIT {
         // Disconnect from session so that the updates on updatedRestaurant are not directly saved in db
         em.detach(updatedRestaurant);
         updatedRestaurant
-            .restaurantId(UPDATED_RESTAURANT_ID)
             .name(UPDATED_NAME)
             .description(UPDATED_DESCRIPTION);
 
@@ -250,7 +223,6 @@ public class RestaurantResourceIT {
         List<Restaurant> restaurantList = restaurantRepository.findAll();
         assertThat(restaurantList).hasSize(databaseSizeBeforeUpdate);
         Restaurant testRestaurant = restaurantList.get(restaurantList.size() - 1);
-        assertThat(testRestaurant.getRestaurantId()).isEqualTo(UPDATED_RESTAURANT_ID);
         assertThat(testRestaurant.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testRestaurant.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
     }

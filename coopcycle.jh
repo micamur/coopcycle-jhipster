@@ -12,9 +12,9 @@ entity Role {
 }
 
 /**
- * The User entity.
+ * The UserAccount entity.
  */
-entity User {
+entity UserAccount {
   login String required unique minlength(3) maxlength(40)
   email String required unique pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
   password String required minlength(8)
@@ -98,18 +98,18 @@ entity Course {
 relationship ManyToMany {
   Cooperative{restaurant} to Restaurant{cooperative}
   Product{basket} to Basket{product}
-  Cooperative{adminsys} to User{adminsys}
-  Cooperative{admincoop} to User{admincoop}
-  Role{accountId} to User{role}
+  Cooperative{adminsys} to UserAccount{adminsys}
+  Cooperative{admincoop} to UserAccount{admincoop}
+  Role{accountId} to UserAccount{role}
 }
 
 relationship ManyToOne {
   Product{restaurant} to Restaurant
   Course{restaurant} to Restaurant
-  Course{deliverer} to User
-  Course{customer} to User
-  Restaurant{owner} to User
-  Cooperative{dg} to User
+  Course{deliverer} to UserAccount
+  Course{customer} to UserAccount
+  Restaurant{owner} to UserAccount
+  Cooperative{dg} to UserAccount
 }
 
 relationship OneToOne {

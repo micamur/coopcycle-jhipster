@@ -4,7 +4,6 @@ import { Disponibility } from 'app/shared/model/enumerations/disponibility.model
 
 export interface IProduct {
   id?: number;
-  productId?: number;
   name?: string;
   description?: string;
   price?: number;
@@ -16,7 +15,6 @@ export interface IProduct {
 export class Product implements IProduct {
   constructor(
     public id?: number,
-    public productId?: number,
     public name?: string,
     public description?: string,
     public price?: number,

@@ -6,13 +6,13 @@
     <!--
         Added the constraints for entity Restaurant.
     -->
-    <changeSet id="20200401140000-2" author="jhipster">
+    <changeSet id="20200401163300-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="owner_id"
                                  baseTableName="restaurant"
                                  constraintName="fk_restaurant_owner_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
 
     </changeSet>
 </databaseChangeLog>

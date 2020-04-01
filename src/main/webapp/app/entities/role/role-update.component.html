@@ -32,7 +32,7 @@
                 <div class="form-group">
                     <label jhiTranslate="coopcycleApp.role.accountId" for="field_accountIds">Account Id</label>
                     <select class="form-control" id="field_accountIds" multiple name="accountIds" formControlName="accountIds">
-                        <option [ngValue]="getSelected(editForm.get('accountIds')!.value, userOption)" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                        <option [ngValue]="getSelected(editForm.get('accountIds')!.value, userAccountOption)" *ngFor="let userAccountOption of useraccounts; trackBy: trackById">{{ userAccountOption.id }}</option>
                     </select>
                 </div>
             </div>

@@ -41,7 +41,6 @@ describe('Course e2e test', () => {
     await courseComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      courseUpdatePage.setCourseIdInput('5'),
       courseUpdatePage.stateSelectLastOption(),
       courseUpdatePage.paymentMethodSelectLastOption(),
       courseUpdatePage.setEstimatedPreparationTimeInput('01/01/2001' + protractor.Key.TAB + '02:30AM'),
@@ -53,7 +52,6 @@ describe('Course e2e test', () => {
       courseUpdatePage.customerSelectLastOption()
     ]);
 
-    expect(await courseUpdatePage.getCourseIdInput()).to.eq('5', 'Expected courseId value to be equals to 5');
     expect(await courseUpdatePage.getEstimatedPreparationTimeInput()).to.contain(
       '2001-01-01T02:30',
       'Expected estimatedPreparationTime value to be equals to 2000-12-31'

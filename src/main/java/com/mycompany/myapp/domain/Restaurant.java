@@ -30,10 +30,6 @@ public class Restaurant implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "restaurant_id", nullable = false, unique = true)
-    private Long restaurantId;
-
-    @NotNull
     @Size(min = 1)
     @Column(name = "name", nullable = false)
     private String name;
@@ -44,7 +40,7 @@ public class Restaurant implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties("restaurants")
-    private User owner;
+    private UserAccount owner;
 
     @ManyToMany(mappedBy = "restaurants")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
@@ -58,19 +54,6 @@ public class Restaurant implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getRestaurantId() {
-        return restaurantId;
-    }
-
-    public Restaurant restaurantId(Long restaurantId) {
-        this.restaurantId = restaurantId;
-        return this;
-    }
-
-    public void setRestaurantId(Long restaurantId) {
-        this.restaurantId = restaurantId;
     }
 
     public String getName() {
@@ -99,17 +82,17 @@ public class Restaurant implements Serializable {
         this.description = description;
     }
 
-    public User getOwner() {
+    public UserAccount getOwner() {
         return owner;
     }
 
-    public Restaurant owner(User user) {
-        this.owner = user;
+    public Restaurant owner(UserAccount userAccount) {
+        this.owner = userAccount;
         return this;
     }
 
-    public void setOwner(User user) {
-        this.owner = user;
+    public void setOwner(UserAccount userAccount) {
+        this.owner = userAccount;
     }
 
     public Set<Cooperative> getCooperatives() {
@@ -158,7 +141,6 @@ public class Restaurant implements Serializable {
     public String toString() {
         return "Restaurant{" +
             "id=" + getId() +
-            ", restaurantId=" + getRestaurantId() +
             ", name='" + getName() + "'" +
             ", description='" + getDescription() + "'" +
             "}";

@@ -29,7 +29,6 @@ export class CourseUpdatePage {
   saveButton = element(by.id('save-entity'));
   cancelButton = element(by.id('cancel-save'));
 
-  courseIdInput = element(by.id('field_courseId'));
   stateSelect = element(by.id('field_state'));
   paymentMethodSelect = element(by.id('field_paymentMethod'));
   estimatedPreparationTimeInput = element(by.id('field_estimatedPreparationTime'));
@@ -43,14 +42,6 @@ export class CourseUpdatePage {
 
   async getPageTitle(): Promise<string> {
     return this.pageTitle.getAttribute('jhiTranslate');
-  }
-
-  async setCourseIdInput(courseId: string): Promise<void> {
-    await this.courseIdInput.sendKeys(courseId);
-  }
-
-  async getCourseIdInput(): Promise<string> {
-    return await this.courseIdInput.getAttribute('value');
   }
 
   async setStateSelect(state: string): Promise<void> {

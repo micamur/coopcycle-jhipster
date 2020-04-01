@@ -20,7 +20,7 @@ describe('Service Tests', () => {
       service = injector.get(CooperativeService);
       httpMock = injector.get(HttpTestingController);
 
-      elemDefault = new Cooperative(0, 0, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new Cooperative(0, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -54,7 +54,6 @@ describe('Service Tests', () => {
       it('should update a Cooperative', () => {
         const returnedFromService = Object.assign(
           {
-            cooperativeId: 1,
             name: 'BBBBBB',
             area: 'BBBBBB'
           },
@@ -73,7 +72,6 @@ describe('Service Tests', () => {
       it('should return a list of Cooperative', () => {
         const returnedFromService = Object.assign(
           {
-            cooperativeId: 1,
             name: 'BBBBBB',
             area: 'BBBBBB'
           },

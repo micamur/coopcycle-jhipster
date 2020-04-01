@@ -8,28 +8,33 @@
 
     
     <!--
-        Added the entity Basket.
+        Added the entity Role.
     -->
-    <changeSet id="20200401140200-1" author="jhipster">
-        <createTable tableName="basket" remarks="The Basket entity.">
+    <changeSet id="20200401163100-1" author="jhipster">
+        <createTable tableName="role">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="basket_id" type="bigint">
-                <constraints nullable="false" unique="true" uniqueConstraintName="ux_basket_basket_id" />
-            </column>
-            <column name="basket_state" type="varchar(255)">
+            <column name="role" type="varchar(255)">
                 <constraints nullable="false" />
-            </column>
-            <column name="order_id_id" type="bigint">
-                <constraints unique="true" nullable="true" uniqueConstraintName="ux_basket_order_id_id" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
 
-    <changeSet id="20200401140200-1-relations" author="jhipster">
+    <changeSet id="20200401163100-1-relations" author="jhipster">
 
+        <createTable tableName="role_account_id">
+            <column name="account_id_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="role_id, account_id_id" tableName="role_account_id"/>
+        
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
 
@@ -41,14 +46,13 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200401140200-1-data" author="jhipster" context="faker">
+    <changeSet id="20200401163100-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/basket.csv"
+                  file="config/liquibase/fake-data/role.csv"
                   separator=";"
-                  tableName="basket">
+                  tableName="role">
             <column name="id" type="numeric"/>
-            <column name="basket_id" type="numeric"/>
-            <column name="basket_state" type="string"/>
+            <column name="role" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

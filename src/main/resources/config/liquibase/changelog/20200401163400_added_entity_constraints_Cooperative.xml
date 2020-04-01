@@ -6,13 +6,13 @@
     <!--
         Added the constraints for entity Cooperative.
     -->
-    <changeSet id="20200401140100-2" author="jhipster">
+    <changeSet id="20200401163400-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="dg_id"
                                  baseTableName="cooperative"
                                  constraintName="fk_cooperative_dg_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
 
         <addForeignKeyConstraint baseColumnNames="cooperative_id"
                                  baseTableName="cooperative_restaurant"
@@ -36,7 +36,7 @@
                                  baseTableName="cooperative_adminsys"
                                  constraintName="fk_cooperative_adminsys_adminsys_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
         
         <addForeignKeyConstraint baseColumnNames="cooperative_id"
                                  baseTableName="cooperative_admincoop"
@@ -48,7 +48,7 @@
                                  baseTableName="cooperative_admincoop"
                                  constraintName="fk_cooperative_admincoop_admincoop_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="jhi_user"/>
+                                 referencedTableName="user_account"/>
         
     </changeSet>
 </databaseChangeLog>

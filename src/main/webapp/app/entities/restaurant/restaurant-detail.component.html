@@ -8,10 +8,6 @@
             <jhi-alert-error></jhi-alert-error>
 
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="coopcycleApp.restaurant.restaurantId">Restaurant Id</span></dt>
-                <dd>
-                    <span>{{ restaurant.restaurantId }}</span>
-                </dd>
                 <dt><span jhiTranslate="coopcycleApp.restaurant.name">Name</span></dt>
                 <dd>
                     <span>{{ restaurant.name }}</span>
@@ -22,7 +18,9 @@
                 </dd>
                 <dt><span jhiTranslate="coopcycleApp.restaurant.owner">Owner</span></dt>
                 <dd>
-                    {{ restaurant.owner?.id }}
+                    <div *ngIf="restaurant.owner">
+                        <a [routerLink]="['/user-account', restaurant.owner?.id, 'view']">{{ restaurant.owner?.id }}</a>
+                    </div>
                 </dd>
             </dl>
 

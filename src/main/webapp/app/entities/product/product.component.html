@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th scope="col" ><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col" ><span jhiTranslate="coopcycleApp.product.productId">Product Id</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.product.name">Name</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.product.description">Description</span></th>
                     <th scope="col" ><span jhiTranslate="coopcycleApp.product.price">Price</span></th>
@@ -36,7 +35,6 @@
             <tbody>
                 <tr *ngFor="let product of products ;trackBy: trackId">
                     <td><a [routerLink]="['/product', product.id, 'view']">{{ product.id }}</a></td>
-                    <td>{{ product.productId }}</td>
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price }}</td>

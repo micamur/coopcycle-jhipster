@@ -31,10 +31,6 @@ public class Basket implements Serializable {
     private Long id;
 
     @NotNull
-    @Column(name = "basket_id", nullable = false, unique = true)
-    private Long basketId;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "basket_state", nullable = false)
     private BasketState basketState;
@@ -55,19 +51,6 @@ public class Basket implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getBasketId() {
-        return basketId;
-    }
-
-    public Basket basketId(Long basketId) {
-        this.basketId = basketId;
-        return this;
-    }
-
-    public void setBasketId(Long basketId) {
-        this.basketId = basketId;
     }
 
     public BasketState getBasketState() {
@@ -142,7 +125,6 @@ public class Basket implements Serializable {
     public String toString() {
         return "Basket{" +
             "id=" + getId() +
-            ", basketId=" + getBasketId() +
             ", basketState='" + getBasketState() + "'" +
             "}";
     }

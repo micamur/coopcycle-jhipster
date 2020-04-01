@@ -44,6 +44,10 @@ public class CacheConfiguration {
             createCache(cm, com.mycompany.myapp.domain.User.class.getName() + ".authorities");
             createCache(cm, com.mycompany.myapp.domain.Role.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Role.class.getName() + ".accountIds");
+            createCache(cm, com.mycompany.myapp.domain.UserAccount.class.getName());
+            createCache(cm, com.mycompany.myapp.domain.UserAccount.class.getName() + ".adminsys");
+            createCache(cm, com.mycompany.myapp.domain.UserAccount.class.getName() + ".admincoops");
+            createCache(cm, com.mycompany.myapp.domain.UserAccount.class.getName() + ".roles");
             createCache(cm, com.mycompany.myapp.domain.Restaurant.class.getName());
             createCache(cm, com.mycompany.myapp.domain.Restaurant.class.getName() + ".cooperatives");
             createCache(cm, com.mycompany.myapp.domain.Cooperative.class.getName());

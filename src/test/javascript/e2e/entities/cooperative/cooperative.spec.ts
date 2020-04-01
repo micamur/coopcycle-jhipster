@@ -44,7 +44,6 @@ describe('Cooperative e2e test', () => {
     await cooperativeComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      cooperativeUpdatePage.setCooperativeIdInput('5'),
       cooperativeUpdatePage.setNameInput('name'),
       cooperativeUpdatePage.setAreaInput('area'),
       cooperativeUpdatePage.dgSelectLastOption()
@@ -53,7 +52,6 @@ describe('Cooperative e2e test', () => {
       // cooperativeUpdatePage.admincoopSelectLastOption(),
     ]);
 
-    expect(await cooperativeUpdatePage.getCooperativeIdInput()).to.eq('5', 'Expected cooperativeId value to be equals to 5');
     expect(await cooperativeUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await cooperativeUpdatePage.getAreaInput()).to.eq('area', 'Expected Area value to be equals to area');
 

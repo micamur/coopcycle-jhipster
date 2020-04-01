@@ -41,13 +41,11 @@ describe('Restaurant e2e test', () => {
     await restaurantComponentsPage.clickOnCreateButton();
 
     await promise.all([
-      restaurantUpdatePage.setRestaurantIdInput('5'),
       restaurantUpdatePage.setNameInput('name'),
       restaurantUpdatePage.setDescriptionInput('description'),
       restaurantUpdatePage.ownerSelectLastOption()
     ]);
 
-    expect(await restaurantUpdatePage.getRestaurantIdInput()).to.eq('5', 'Expected restaurantId value to be equals to 5');
     expect(await restaurantUpdatePage.getNameInput()).to.eq('name', 'Expected Name value to be equals to name');
     expect(await restaurantUpdatePage.getDescriptionInput()).to.eq('description', 'Expected Description value to be equals to description');
 

@@ -1,12 +1,12 @@
-import { IUser } from 'app/core/user/user.model';
+import { IUserAccount } from 'app/shared/model/user-account.model';
 import { RoleOption } from 'app/shared/model/enumerations/role-option.model';
 
 export interface IRole {
   id?: number;
   role?: RoleOption;
-  accountIds?: IUser[];
+  accountIds?: IUserAccount[];
 }
 
 export class Role implements IRole {
-  constructor(public id?: number, public role?: RoleOption, public accountIds?: IUser[]) {}
+  constructor(public id?: number, public role?: RoleOption, public accountIds?: IUserAccount[]) {}
 }
