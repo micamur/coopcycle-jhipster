@@ -15,7 +15,6 @@ entity Role {
  * The User entity.
  */
 entity User {
-  userId Long required unique
   login String required unique minlength(3) maxlength(40)
   email String required unique pattern(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)
   password String required minlength(8)
@@ -25,7 +24,6 @@ entity User {
  * The Restaurant entity.
  */
 entity Restaurant {
-  restaurantId Long required unique
   name String required minlength(1)
   description String minlength(20) maxlength(280)
 }
@@ -34,7 +32,6 @@ entity Restaurant {
  * The Cooperative entity.
  */
 entity Cooperative {
-  cooperativeId Long required unique
   name String required minlength(1)
   area String required minlength(1)
 }
@@ -47,7 +44,6 @@ enum BasketState {
  * The Basket entity.
  */
 entity Basket {
-  basketId Long required unique
   basketState BasketState required
 }
 
@@ -59,10 +55,9 @@ enum Disponibility {
  * The Product entity.
  */
 entity Product {
-  productId Long required unique
   name String required minlength(1)
   description String minlength(5) maxlength(280)
-  price BigDecimal required min(0)
+  price Float required min(0)
   disponibility Disponibility required
 }
 
@@ -86,7 +81,6 @@ enum DeliveryState {
  * The Course entity.
  */
 entity Course {
-  courseId Long required unique
   state CourseState required
   state PreparationState required
   state DeliveryState required
